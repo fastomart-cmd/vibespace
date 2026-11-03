@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AppCompat parent so AppCompatDelegate.setApplicationLocales works; all UI is Compose. -->
+    <style name="Theme.VibeSpace" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/vs_black</item>
+        <item name="android:statusBarColor">@color/vs_black</item>
+        <item name="android:navigationBarColor">@color/vs_black</item>
+        <item name="colorPrimary">@color/vs_purple</item>
+        <item name="colorAccent">@color/vs_cyan</item>
+    </style>
+</resources>

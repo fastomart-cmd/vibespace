@@ -1,0 +1,5 @@
+# /etc/caddy/Caddyfile  — Caddy gets and renews the TLS certificate automatically.
+api.example.com {
+	encode gzip
+	reverse_proxy 127.0.0.1:3000
+}

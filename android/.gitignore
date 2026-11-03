@@ -1,0 +1,11 @@
+build/
+.gradle/
+local.properties
+*.iml
+.idea/
+captures/
+.kotlin/
+app/build/
+
+# Built locally / in the sandbox; download CI builds from GitHub Actions artifacts instead of committing
+VibeSpace-debug.apk

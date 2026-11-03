@@ -1,0 +1,21 @@
+# /etc/systemd/system/vibespace-api.service
+[Unit]
+Description=VibeSpace API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=vibespace
+WorkingDirectory=/opt/vibespace/backend
+EnvironmentFile=/opt/vibespace/backend/.env
+ExecStart=/usr/bin/node dist/server.js
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

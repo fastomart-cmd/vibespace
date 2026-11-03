@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">VibeSpace</string>
+    <string name="tagline">Create. Share. Earn.</string>
+    <string name="made_in_india">Made in India</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_create">Create</string>
+    <string name="nav_pulse">Pulse</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- VibeFeed -->
+    <string name="vibefeed">VibeFeed</string>
+    <string name="tab_for_you">For You</string>
+    <string name="tab_following">Following</string>
+    <string name="tab_trending">Trending</string>
+    <string name="tab_explore">Explore</string>
+    <string name="feed_empty_title">Nothing here yet</string>
+    <string name="feed_empty_body">Be the first to post something. Fresh vibes show up here.</string>
+    <string name="following_empty_body">Become a VibeMate of creators you like and their posts land here.</string>
+    <string name="following_guest_title">Your Following feed</string>
+    <string name="following_guest_body">Log in to see posts from your VibeMates.</string>
+    <string name="search_hashtag_hint">Search a hashtag, e.g. #holi</string>
+    <string name="explore_tag_results">Posts tagged #%1$s</string>
+    <string name="clear_search">Clear search</string>
+
+    <!-- Post -->
+    <string name="post_title">Post</string>
+    <string name="vibeclaps_count">%1$d VibeClaps</string>
+    <string name="vibetalk_count">%1$d VibeTalk</string>
+    <string name="saves_count">%1$d saves</string>
+    <string name="action_clap">VibeClap</string>
+    <string name="action_save">Save</string>
+    <string name="action_saved">Saved</string>
+    <string name="action_report">Report</string>
+    <string name="action_delete">Delete</string>
+    <string name="post_image">Post image</string>
+    <string name="post_deleted">Post deleted</string>
+
+    <!-- VibeTalk -->
+    <string name="vibetalk">VibeTalk</string>
+    <string name="vibetalk_empty">No VibeTalk yet. Start the conversation.</string>
+    <string name="vibetalk_hint">Add to the VibeTalk…</string>
+    <string name="reply_hint">Reply to @%1$s…</string>
+    <string name="reply">Reply</string>
+    <string name="cancel_reply">Cancel reply</string>
+    <string name="view_replies">View %1$d replies</string>
+    <string name="hide_replies">Hide replies</string>
+    <string name="load_more_replies">More replies</string>
+    <string name="comment_deleted">[deleted]</string>
+    <string name="pinned">Pinned</string>
+    <string name="send">Send</string>
+    <string name="edited">edited</string>
+
+    <!-- Create -->
+    <string name="create_title">Create a post</string>
+    <string name="create_hint">What\'s your vibe? Add #hashtags and @mentions</string>
+    <string name="add_image">Add image</string>
+    <string name="remove_image">Remove image</string>
+    <string name="publish">Post</string>
+    <string name="uploading_image">Uploading image…</string>
+    <string name="publishing">Posting…</string>
+    <string name="post_published">Posted!</string>
+    <string name="create_guest_title">Share your vibe</string>
+    <string name="create_guest_body">Log in or sign up to post on VibeSpace.</string>
+    <string name="caption_too_long">Keep it under 2,200 characters.</string>
+    <string name="caption_required">Write something or add an image.</string>
+
+    <!-- Profile -->
+    <string name="vibemates">VibeMates</string>
+    <string name="vibing_with">Vibing with</string>
+    <string name="vibestars">VibeStars</string>
+    <string name="posts">Posts</string>
+    <string name="action_vibemate">VibeMate</string>
+    <string name="action_vibemated">VibeMates ✓</string>
+    <string name="action_requested">Requested</string>
+    <string name="action_vibestar">VibeStar</string>
+    <string name="action_vibestarred">VibeStar ✓</string>
+    <string name="vibemates_you">VibeMates with you</string>
+    <string name="action_block">Block</string>
+    <string name="action_unblock">Unblock</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="private_account">Private account</string>
+    <string name="private_account_body">Only approved VibeMates can see these posts.</string>
+    <string name="profile_posts_empty">No posts yet.</string>
+    <string name="profile_guest_title">Your VibeSpace</string>
+    <string name="profile_guest_body">Log in to set up your profile, gather VibeMates and VibeStars, and start posting.</string>
+    <string name="user_list_empty">No one here yet.</string>
+    <string name="blocked_confirm_title">Block @%1$s?</string>
+    <string name="blocked_confirm_body">They won\'t be able to see your posts or interact with you. VibeMate and VibeStar links between you are removed.</string>
+
+    <!-- Edit profile -->
+    <string name="display_name">Display name</string>
+    <string name="bio">Bio</string>
+    <string name="change_avatar">Change photo</string>
+    <string name="remove_avatar">Remove photo</string>
+    <string name="save">Save</string>
+    <string name="saved_ok">Saved</string>
+
+    <!-- Auth -->
+    <string name="login">Log in</string>
+    <string name="signup">Sign up</string>
+    <string name="logout">Log out</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="email_or_username">Email or username</string>
+    <string name="password">Password</string>
+    <string name="new_password">New password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="forgot_title">Reset your password</string>
+    <string name="forgot_body">Enter your account email. If it\'s registered, we\'ll send a reset link.</string>
+    <string name="send_reset_link">Send reset link</string>
+    <string name="reset_sent">If that email has an account, a reset link is on its way. Open it on this phone.</string>
+    <string name="have_reset_token">Have a reset link? Paste the token</string>
+    <string name="reset_token">Reset token</string>
+    <string name="set_new_password">Set new password</string>
+    <string name="reset_done">Password updated. Please log in.</string>
+    <string name="no_account">New here? Sign up</string>
+    <string name="have_account">Already have an account? Log in</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="join_vibespace">Join VibeSpace</string>
+    <string name="username_rules">3–30 characters: a–z, 0–9, _ or .</string>
+    <string name="password_rules">At least 8 characters</string>
+    <string name="invalid_email">Enter a valid email</string>
+    <string name="invalid_username">Use 3–30 characters: a–z, 0–9, _ or .</string>
+    <string name="invalid_password">Password must be at least 8 characters</string>
+    <string name="field_required">Required</string>
+    <string name="continue_as_guest">Keep browsing</string>
+    <string name="login_prompt_title">Join the vibe</string>
+    <string name="login_prompt_body">Log in or sign up to post, VibeClap, join the VibeTalk, save posts, and become a VibeMate or VibeStar.</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="language">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_hindi">हिन्दी (Hindi)</string>
+    <string name="privacy_private">Private account</string>
+    <string name="privacy_private_body">Only approved VibeMates see your posts. Private accounts can\'t take VibeStars.</string>
+    <string name="blocked_users">Blocked users</string>
+    <string name="blocked_empty">You haven\'t blocked anyone.</string>
+    <string name="server">Server</string>
+    <string name="version">Version %1$s</string>
+    <string name="logout_confirm">Log out of VibeSpace on this phone?</string>
+
+    <!-- Report -->
+    <string name="report_title">Report</string>
+    <string name="report_body">Why are you reporting this?</string>
+    <string name="report_sent">Thanks. Our team will review it.</string>
+    <string name="reason_spam">Spam</string>
+    <string name="reason_harassment">Harassment</string>
+    <string name="reason_hate">Hate speech</string>
+    <string name="reason_nudity">Nudity</string>
+    <string name="reason_violence">Violence</string>
+    <string name="reason_misinformation">Misinformation</string>
+    <string name="reason_impersonation">Impersonation</string>
+    <string name="reason_other">Other</string>
+
+    <!-- Pulse -->
+    <string name="pulse_title">VibePulse</string>
+    <string name="pulse_coming_soon">Coming soon</string>
+    <string name="pulse_body">Live updates, alerts and what\'s buzzing around you. We\'re building it now.</string>
+
+    <!-- Generic states -->
+    <string name="loading">Loading…</string>
+    <string name="retry">Try again</string>
+    <string name="error_generic">Something went wrong.</string>
+    <string name="error_network">Can\'t reach VibeSpace. Check your connection and try again.</string>
+    <string name="error_session_expired">Your session ended. Please log in again.</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="back">Back</string>
+    <string name="more">More</string>
+    <string name="confirm">Confirm</string>
+    <string name="just_now">just now</string>
+    <string name="minutes_ago">%1$dm</string>
+    <string name="hours_ago">%1$dh</string>
+    <string name="days_ago">%1$dd</string>
+    <string name="avatar">Profile photo</string>
+    <string name="logo">VibeSpace logo</string>
+    <!-- Post views (eye icon + count). views_number_system: "international" = 1.2K / 1.2M, "indian" = 1.2K / 3.4 lakh / 1.2 Cr -->
+    <string name="views_number_system">international</string>
+    <string name="views_lakh">lakh</string>
+    <string name="views_crore">Cr</string>
+    <plurals name="views_count">
+        <item quantity="one">%1$s view</item>
+        <item quantity="other">%1$s views</item>
+    </plurals>
+</resources>

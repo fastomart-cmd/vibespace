@@ -1,0 +1,69 @@
+# Render Blueprint for the VibeSpace API (free plan, no credit card).
+# Render dashboard → New → Blueprint → pick this GitHub repo. Render reads this file from the repo root.
+# Values marked `sync: false` are asked for once in the dashboard when you create the Blueprint (they are secrets,
+# so they are never stored in git). Step-by-step: docs/DEPLOY_FREE.md
+services:
+  - type: web
+    name: vibespace-api
+    runtime: node
+    plan: free
+    region: singapore          # closest Render region to India
+    rootDir: backend
+    # --include=dev: NODE_ENV=production below would otherwise make `npm ci` skip TypeScript, which the build needs.
+    buildCommand: npm ci --include=dev && npm run build
+    # Migrations run at boot (RUN_MIGRATIONS_ON_START): Render free has no pre-deploy command or shell.
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY        # Render's proxy sets X-Forwarded-For; needed for per-IP rate limits
+        value: "true"
+      - key: LOG_LEVEL
+        value: info
+      # PORT is injected by Render (the app reads it). PUBLIC_BASE_URL falls back to RENDER_EXTERNAL_URL.
+
+      # ---- database: Supabase → Connect → Session pooler URI (port 5432, NOT 6543)
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_SSL
+        value: "true"
+      - key: DATABASE_POOL_MAX   # Supabase free pooler has few connections; one small instance needs little
+        value: "5"
+      - key: RUN_MIGRATIONS_ON_START
+        value: "true"
+
+      # ---- auth
+      - key: JWT_ACCESS_SECRET   # random, generated once by Render
+        generateValue: true
+
+      # ---- media: Supabase Storage (public bucket) through its S3 endpoint
+      - key: STORAGE_PROVIDER
+        value: supabase
+      - key: SUPABASE_PROJECT_REF    # the xxxx in https://xxxx.supabase.co
+        sync: false
+      - key: SUPABASE_STORAGE_BUCKET
+        value: vibespace-media
+      - key: SUPABASE_UPLOAD_MODE    # s3 (presigned PUT) | signed-url (needs SUPABASE_SERVICE_ROLE_KEY)
+        value: s3
+      - key: SUPABASE_S3_REGION      # Storage → S3 configuration → Region, e.g. ap-south-1
+        sync: false
+      - key: SUPABASE_S3_ACCESS_KEY_ID
+        sync: false
+      - key: SUPABASE_S3_SECRET_ACCESS_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY   # optional: only for SUPABASE_UPLOAD_MODE=signed-url
+        sync: false
+      - key: MEDIA_MAX_IMAGE_BYTES       # app limit; Supabase free also caps every file at 50 MB
+        value: "10485760"
+      - key: MEDIA_VERIFY_UPLOADS
+        value: "true"
+
+      # ---- email (optional). HTTP API only: Render free blocks SMTP ports. Without a key, reset links go to the log.
+      - key: RESEND_API_KEY
+        sync: false
+      - key: MAIL_FROM
+        value: VibeSpace <onboarding@resend.dev>
