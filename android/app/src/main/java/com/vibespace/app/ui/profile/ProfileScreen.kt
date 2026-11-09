@@ -26,6 +26,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
@@ -112,6 +113,8 @@ fun ProfileScreen(
                 navigationIcon = { if (onBack != null) IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.back)) } },
                 actions = {
                     if (isOwnTab || s.isSelf) {
+                        val shareCtx = androidx.compose.ui.platform.LocalContext.current
+                        IconButton(onClick = { com.vibespace.app.ui.common.shareApp(shareCtx) }) { Icon(androidx.compose.material.icons.Icons.Filled.Share, stringResource(R.string.share_app)) }
                         IconButton(onClick = onSettings) { Icon(Icons.Filled.Settings, stringResource(R.string.settings)) }
                     } else if (s.profile != null) {
                         Box {
