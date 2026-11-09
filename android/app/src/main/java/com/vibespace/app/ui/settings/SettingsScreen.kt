@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -33,6 +34,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalContext
+import com.vibespace.app.ui.common.shareApp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
@@ -121,6 +124,15 @@ fun SettingsScreen(vm: SettingsViewModel, onBack: () -> Unit, onBlocked: () -> U
                     RadioButton(selected = lang == code, onClick = { vm.chooseLanguage(code) })
                     Text(stringResource(label))
                 }
+            }
+            val shareCtx = LocalContext.current
+            HorizontalDivider(color = VibeColors.Outline, modifier = Modifier.padding(vertical = 8.dp))
+            Row(Modifier.fillMaxWidth().clickable { shareApp(shareCtx) }.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text(stringResource(R.string.share_app), style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.share_app_body), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                Icon(Icons.Filled.Share, null)
             }
             if (loggedIn) {
                 HorizontalDivider(color = VibeColors.Outline, modifier = Modifier.padding(vertical = 8.dp))
