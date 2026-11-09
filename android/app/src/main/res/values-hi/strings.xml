@@ -174,4 +174,7 @@
         <item quantity="one">%1$s व्यू</item>
         <item quantity="other">%1$s व्यूज़</item>
     </plurals>
+    <string name="share_app">VibeSpace शेयर करें</string>
+    <string name="share_app_body">WhatsApp वगैरह पर दोस्तों को बुलाएँ</string>
+    <string name="share_app_message">VibeSpace पर मेरे साथ जुड़ें! Create. Share. Earn. 🇮🇳\nApp डाउनलोड करें: %1$s</string>
 </resources>
