@@ -25,10 +25,10 @@ export default async function postRoutes(app0: FastifyInstance) {
       description: 'Hashtags (#tag, Hindi supported) and @mentions are parsed from the caption server-side.',
       security: bearer,
       body: z.discriminatedUnion('type', [
-        z.object({ type: z.literal('text'), caption: z.string().trim().min(1).max(2200) }),
+        z.object({ type: z.literal('text'), caption: z.string().trim().min(1).max(2200).refine((v) => Buffer.byteLength(v, 'utf8') <= 10 * 1024, { message: 'Post text is too long (max 10 KB).' }) }),
         z.object({
           type: z.literal('image'),
-          caption: z.string().trim().max(2200).default(''),
+          caption: z.string().trim().max(2200).refine((v) => Buffer.byteLength(v, 'utf8') <= 10 * 1024, { message: 'Post text is too long (max 10 KB).' }).default(''),
           mediaIds: z.array(z.string().uuid()).min(1).max(10),
         }),
       ]),
@@ -84,7 +84,7 @@ export default async function postRoutes(app0: FastifyInstance) {
       summary: 'Edit the caption of my post',
       security: bearer,
       params: IdParam,
-      body: z.object({ caption: z.string().trim().max(2200) }),
+      body: z.object({ caption: z.string().trim().max(2200).refine((v) => Buffer.byteLength(v, 'utf8') <= 10 * 1024, { message: 'Post text is too long (max 10 KB).' }) }),
     },
     ...write,
   }, async (req) => {
