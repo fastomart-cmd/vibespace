@@ -187,4 +187,7 @@
         <item quantity="one">%1$s view</item>
         <item quantity="other">%1$s views</item>
     </plurals>
+    <string name="share_app">Share VibeSpace</string>
+    <string name="share_app_body">Invite friends on WhatsApp and more</string>
+    <string name="share_app_message">Join me on VibeSpace! Create. Share. Earn. 🇮🇳\nDownload the app: %1$s</string>
 </resources>
