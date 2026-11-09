@@ -233,7 +233,10 @@ export function createStorage(config: Config): Storage {
 }
 
 /** Largest allowed upload for a purpose: app limit, avatar cap, and the provider's hard limit (Supabase free: 50 MB). */
+export const MAX_IMAGE_BYTES = 100 * 1024;
+
 export function maxUploadBytes(config: Config, storage: Pick<Storage, 'maxUploadBytes'>, purpose: string): number {
-  const appMax = purpose === 'avatar' ? Math.min(config.MEDIA_MAX_IMAGE_BYTES, 5 * 1024 * 1024) : config.MEDIA_MAX_IMAGE_BYTES;
+  // VibeSpace policy (2026-11-09): profile photo, post image and thumbnail are each at most 100 KB.
+  const appMax = Math.min(config.MEDIA_MAX_IMAGE_BYTES, MAX_IMAGE_BYTES);
   return Math.min(appMax, storage.maxUploadBytes);
 }
