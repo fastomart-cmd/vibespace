@@ -16,6 +16,8 @@ const EnvSchema = z.object({
   CORS_ORIGINS: z.string().default(''),
 
   DATABASE_URL: z.string().min(1),
+  // Optional: if set, replaces [YOUR-PASSWORD] in DATABASE_URL (lets Supabase's URL template be pasted as-is).
+  DATABASE_PASSWORD: z.string().optional(),
   DATABASE_SSL: bool.default('false'),
   DATABASE_POOL_MAX: z.coerce.number().int().default(10),
   // Apply pending migrations at boot (Render free has no pre-deploy step or shell). Idempotent and advisory-locked.

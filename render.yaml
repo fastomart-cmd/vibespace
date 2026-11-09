@@ -27,7 +27,9 @@ services:
       # PORT is injected by Render (the app reads it). PUBLIC_BASE_URL falls back to RENDER_EXTERNAL_URL.
 
       # ---- database: Supabase → Connect → Session pooler URI (port 5432, NOT 6543)
-      - key: DATABASE_URL
+      - key: DATABASE_URL       # may keep Supabase's [YOUR-PASSWORD] placeholder if DATABASE_PASSWORD is set
+        sync: false
+      - key: DATABASE_PASSWORD  # optional: replaces [YOUR-PASSWORD] in DATABASE_URL
         sync: false
       - key: DATABASE_SSL
         value: "true"

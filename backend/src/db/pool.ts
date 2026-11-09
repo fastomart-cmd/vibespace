@@ -4,14 +4,20 @@ import type { Config } from '../config.js';
 export type Db = pg.Pool;
 export type Queryable = pg.Pool | pg.PoolClient;
 
-export function createPool(config: Pick<Config, 'DATABASE_URL' | 'DATABASE_SSL' | 'DATABASE_POOL_MAX'>): pg.Pool {
+export function createPool(config: Pick<Config, 'DATABASE_URL' | 'DATABASE_SSL' | 'DATABASE_POOL_MAX'> & { DATABASE_PASSWORD?: string }): pg.Pool {
   return new pg.Pool({
-    connectionString: config.DATABASE_URL,
+    connectionString: resolveDatabaseUrl(config.DATABASE_URL, config.DATABASE_PASSWORD),
     max: config.DATABASE_POOL_MAX,
     // Supabase requires TLS. Its cert chain is not in Node's default store, so
     // either set NODE_EXTRA_CA_CERTS to Supabase's CA file or accept the server cert.
     ssl: config.DATABASE_SSL ? { rejectUnauthorized: !!process.env.NODE_EXTRA_CA_CERTS } : undefined,
   });
+}
+
+/** Put DATABASE_PASSWORD (URL-encoded) in place of [YOUR-PASSWORD] when both are present. */
+export function resolveDatabaseUrl(url: string, password?: string): string {
+  if (!password) return url;
+  return url.replace('[YOUR-PASSWORD]', encodeURIComponent(password));
 }
 
 export async function withTx<T>(pool: pg.Pool, fn: (c: pg.PoolClient) => Promise<T>): Promise<T> {
