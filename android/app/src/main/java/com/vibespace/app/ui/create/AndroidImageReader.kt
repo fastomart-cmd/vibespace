@@ -10,10 +10,12 @@ import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 
 /**
- * Turns a picked image into bytes the backend accepts (jpeg/png/webp/heic). Large or unsupported images
- * are re-encoded as JPEG with the long edge capped, which also keeps uploads small on mobile data.
+ * Turns a picked image into a JPEG of at most [maxBytes] (default 100 KB, the VibeSpace limit for
+ * profile photos, post images and thumbnails). Shrinks quality first, then dimensions, until it fits.
  */
-class AndroidImageReader(private val context: Context, private val maxEdge: Int = 2048, private val maxBytes: Int = 4 * 1024 * 1024) : ImageReader {
+class AndroidImageReader(private val context: Context, private val maxEdge: Int = 1080, private val maxBytes: Int = MAX_IMAGE_BYTES) : ImageReader {
+    companion object { const val MAX_IMAGE_BYTES = 100 * 1024 }
+
     override suspend fun read(uri: String): ImagePayload = withContext(Dispatchers.IO) {
         val u = Uri.parse(uri)
         val cr = context.contentResolver
@@ -27,18 +29,25 @@ class AndroidImageReader(private val context: Context, private val maxEdge: Int 
         if (supported && raw.size <= maxBytes && (w ?: 0) <= maxEdge && (h ?: 0) <= maxEdge) {
             return@withContext ImagePayload(raw, type, w, h)
         }
-        // Downscale + JPEG.
         var sample = 1
         val longEdge = maxOf(w ?: 0, h ?: 0)
         while (longEdge / (sample * 2) >= maxEdge) sample *= 2
         val bmp = BitmapFactory.decodeByteArray(raw, 0, raw.size, BitmapFactory.Options().apply { inSampleSize = sample })
             ?: error("Unsupported image")
-        val scaled = if (maxOf(bmp.width, bmp.height) > maxEdge) {
-            val f = maxEdge.toFloat() / maxOf(bmp.width, bmp.height)
-            Bitmap.createScaledBitmap(bmp, (bmp.width * f).toInt(), (bmp.height * f).toInt(), true)
-        } else bmp
-        val out = ByteArrayOutputStream()
-        scaled.compress(Bitmap.CompressFormat.JPEG, 85, out)
-        ImagePayload(out.toByteArray(), "image/jpeg", scaled.width, scaled.height)
+        var edge = minOf(maxEdge, maxOf(bmp.width, bmp.height))
+        while (true) {
+            val f = edge.toFloat() / maxOf(bmp.width, bmp.height)
+            val scaled = if (f < 1f) Bitmap.createScaledBitmap(bmp, maxOf(1, (bmp.width * f).toInt()), maxOf(1, (bmp.height * f).toInt()), true) else bmp
+            for (q in intArrayOf(85, 75, 65, 55, 45, 35)) {
+                val out = ByteArrayOutputStream()
+                scaled.compress(Bitmap.CompressFormat.JPEG, q, out)
+                if (out.size() <= maxBytes || (edge <= 160 && q == 35)) {
+                    return@withContext ImagePayload(out.toByteArray(), "image/jpeg", scaled.width, scaled.height)
+                }
+            }
+            edge = (edge * 0.8f).toInt()
+        }
+        @Suppress("UNREACHABLE_CODE")
+        error("unreachable")
     }
 }
